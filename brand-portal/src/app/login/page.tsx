@@ -9,8 +9,8 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleLogin = async (e?: React.FormEvent) => {
+    e?.preventDefault()
     setError('')
     setLoading(true)
 
@@ -37,19 +37,25 @@ export default function LoginPage() {
           <h1 className="text-[22px] font-semibold text-[#0f0f0f] tracking-tight">Entrar</h1>
           <p className="text-[13px] text-[#6b7280] mt-1">Acesse seu Brand Portal</p>
         </div>
-        <form onSubmit={handleLogin} className="space-y-3">
+        <div className="space-y-3">
           <div>
             <label className="label">E-mail</label>
             <input
-              type="email" value={email} onChange={e => setEmail(e.target.value)}
-              placeholder="voce@empresa.com" required className="input-field"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="voce@empresa.com"
+              className="input-field"
             />
           </div>
           <div>
             <label className="label">Senha</label>
             <input
-              type="password" value={password} onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••" required className="input-field"
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="input-field"
             />
           </div>
           {error && (
@@ -57,15 +63,20 @@ export default function LoginPage() {
               {error}
             </p>
           )}
-          <button type="submit" disabled={loading} className="btn-primary w-full mt-1">
+          <button
+            type="button"
+            disabled={loading}
+            onClick={handleLogin}
+            className="btn-primary w-full mt-1"
+          >
             {loading ? 'Entrando...' : 'Entrar →'}
           </button>
-        </form>
+        </div>
         <div className="mt-4 flex items-center justify-between text-[12px] text-[#6b7280]">
           <Link href="/register" className="hover:text-[#3b5bdb] transition-colors">
             Criar conta
           </Link>
-          <Link href="/forgot-password" className="hover:text-[#3b5bdb] transition-colors">
+          <Link href="/forgot-password" className="hover:text-[#3b5dbdb] transition-colors">
             Esqueci a senha
           </Link>
         </div>
