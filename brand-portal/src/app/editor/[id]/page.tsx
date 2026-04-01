@@ -106,7 +106,7 @@ export default function EditorPage() {
       await supabase.from('projects')
         .update({ slug, is_published: true })
         .eq('id', id)
-      setProject(p => p ? { ...p, slug, is_published: true } : p)
+      setProject(p => p ? { ...p, slug: slug ?? null, is_published: true } : p)
     } else {
       await supabase.from('projects').update({ is_published: true }).eq('id', id)
       setProject(p => p ? { ...p, is_published: true } : p)
