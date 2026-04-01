@@ -4,14 +4,14 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
-    const email = emailRef.current?.value || ''
-    const password = passwordRef.current?.value || ''
+    const email = (emailRef.current as HTMLInputElement)?.value || ''
+    const password = (passwordRef.current as HTMLInputElement)?.value || ''
 
     if (!email || !password) {
       setError('Preencha e-mail e senha.')
@@ -22,7 +22,7 @@ export default function LoginPage() {
     setLoading(true)
 
     const supabase = createClient()
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
       setError(error.message)
