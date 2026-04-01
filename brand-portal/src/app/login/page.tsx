@@ -12,20 +12,21 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError('E-mail ou senha incorretos.')
-      setLoading(false)
-      return
-    }
-    router.push('/dashboard')
-    router.refresh()
+  e.preventDefault()
+  setError('')
+  setLoading(true)
+
+  const supabase = createClient()
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+  if (error) {
+    setError('E-mail ou senha incorretos.')
+    setLoading(false)
+    return
   }
 
+  window.location.href = '/dashboard'
+}
   return (
     <div className="min-h-screen bg-[#fafafa] flex items-center justify-center p-4">
       <div className="w-full max-w-[360px]">
